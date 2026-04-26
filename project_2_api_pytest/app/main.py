@@ -1,5 +1,5 @@
 from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
+from pydantic import BaseModel, Field, field_validator
 
 app = FastAPI(title="Task API for QA Practice")
 
@@ -8,7 +8,14 @@ next_id = 1
 
 
 class TaskCreate(BaseModel):
-    title: str
+    title: str = Field(min_length=1, max_length=120)
+
+    @field_validator("title")
+    @classmethod
+    def title_must_not_be_blank(cls, value: str) -> str:
+        if not value.strip():
+            raise ValueError("Title cannot be blank")
+        return value
 
 
 @app.get("/health")
@@ -40,4 +47,3 @@ def complete_task(task_id: int):
         raise HTTPException(status_code=404, detail="Task not found")
     task["completed"] = True
     return task
-

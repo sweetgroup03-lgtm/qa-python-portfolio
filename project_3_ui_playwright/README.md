@@ -12,6 +12,14 @@
 - Form validation checks
 - Reusable page object
 
+## What I tested
+
+- Успешная отправка формы при валидных данных
+- Ошибка валидации при невалидном email
+- Ошибка валидации при пустой форме
+- Ошибка валидации при невалидном Telegram-нике
+- Повторное использование локаторов и действий через `Page Object`
+
 ## Run
 
 ```powershell
@@ -36,4 +44,3 @@ cd project_3_ui_playwright
 .venv\Scripts\Activate.ps1
 pytest -v
 ```
-

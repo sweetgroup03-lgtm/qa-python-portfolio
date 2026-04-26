@@ -12,6 +12,14 @@
 - Fixtures
 - Positive and negative checks
 
+## What I tested
+
+- `calculator.add`: корректность сложения для целых, отрицательных и дробных чисел
+- `calculator.divide`: корректное деление и ошибка при делении на ноль
+- `cart.total`: подсчет общей суммы добавленных позиций
+- `cart.apply_discount`: расчет итоговой суммы со скидкой 0%, 10% и 100%
+- `cart.add_price`: ошибка при попытке добавить отрицательную цену
+
 ## Run
 
 ```powershell
@@ -21,4 +29,3 @@ python -m venv .venv
 pip install -r requirements.txt
 pytest -v
 ```
-
