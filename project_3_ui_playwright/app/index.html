@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Internship Form Demo</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Segoe UI, Arial, sans-serif;
+      background: #f3f5f8;
+      color: #0f2947;
+    }
+    .layout {
+      max-width: 1200px;
+      margin: 40px auto;
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 32px;
+      padding: 0 24px;
+    }
+    .panel h1 {
+      font-size: 56px;
+      line-height: 1.1;
+      margin: 0 0 20px 0;
+    }
+    .panel p {
+      font-size: 24px;
+      line-height: 1.4;
+      margin: 0;
+      max-width: 560px;
+    }
+    .form-box {
+      background: #ffffff;
+      border-radius: 14px;
+      padding: 24px;
+      box-shadow: 0 8px 24px rgba(15, 41, 71, 0.08);
+    }
+    .field {
+      margin-bottom: 14px;
+    }
+    label {
+      display: block;
+      font-size: 15px;
+      margin-bottom: 6px;
+      color: #375779;
+    }
+    input, select {
+      width: 100%;
+      box-sizing: border-box;
+      border: 1px solid #cad5e2;
+      border-radius: 10px;
+      padding: 14px;
+      font-size: 16px;
+      outline: none;
+    }
+    input:focus, select:focus {
+      border-color: #2a7dd8;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .submit-btn {
+      margin-top: 12px;
+      width: 100%;
+      border: none;
+      border-radius: 10px;
+      padding: 14px;
+      font-size: 16px;
+      background: #2a7dd8;
+      color: white;
+      cursor: pointer;
+    }
+    .error {
+      color: #c73737;
+      font-size: 14px;
+      margin-top: 6px;
+      min-height: 18px;
+    }
+    .success {
+      display: none;
+      margin-top: 10px;
+      color: #16713a;
+      font-weight: 600;
+    }
+    @media (max-width: 900px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+      .panel h1 {
+        font-size: 40px;
+      }
+      .panel p {
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <div class="panel">
+      <h1>Join<br />Internship</h1>
+      <p>Fill in this demo form. After submit, you should see success message if all fields are valid.</p>
+    </div>
+
+    <form id="internship-form" class="form-box">
+      <div class="field">
+        <label for="direction">Direction</label>
+        <select id="direction" name="direction">
+          <option value="">Select direction</option>
+          <option value="python-qa">Python Test Automation</option>
+          <option value="manual-qa">Manual Testing</option>
+        </select>
+      </div>
+
+      <div class="grid">
+        <div class="field">
+          <label for="last_name">Last name</label>
+          <input id="last_name" name="last_name" />
+        </div>
+        <div class="field">
+          <label for="first_name">First name</label>
+          <input id="first_name" name="first_name" />
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="email">Email</label>
+        <input id="email" name="email" />
+      </div>
+
+      <div class="field">
+        <label for="telegram">Telegram</label>
+        <input id="telegram" name="telegram" placeholder="@nickname" />
+      </div>
+
+      <button id="submit-btn" class="submit-btn" type="submit">Submit</button>
+      <div id="error" class="error"></div>
+      <div id="success" class="success">Form submitted successfully.</div>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById("internship-form");
+    const error = document.getElementById("error");
+    const success = document.getElementById("success");
+
+    function isEmailValid(value) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+    }
+
+    function isTelegramValid(value) {
+      return /^@[A-Za-z0-9_]{4,32}$/.test(value);
+    }
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      error.textContent = "";
+      success.style.display = "none";
+
+      const direction = document.getElementById("direction").value.trim();
+      const lastName = document.getElementById("last_name").value.trim();
+      const firstName = document.getElementById("first_name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const telegram = document.getElementById("telegram").value.trim();
+
+      if (!direction || !lastName || !firstName || !email || !telegram) {
+        error.textContent = "All fields are required.";
+        return;
+      }
+      if (!isEmailValid(email)) {
+        error.textContent = "Email is invalid.";
+        return;
+      }
+      if (!isTelegramValid(telegram)) {
+        error.textContent = "Telegram is invalid.";
+        return;
+      }
+
+      success.style.display = "block";
+    });
+  </script>
+</body>
+</html>
+

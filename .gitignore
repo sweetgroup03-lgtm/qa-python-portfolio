@@ -1,0 +1,16 @@
+.idea/
+.vscode/
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.venv/
+venv/
+env/
+dist/
+build/
+*.log
+node_modules/
+playwright-report/
+test-results/
+
